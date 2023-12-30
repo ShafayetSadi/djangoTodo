@@ -1,0 +1,39 @@
+<div id="task-swap-div" class="fixed inset-0 bg-zinc-900/75 z-10"
+    hx-trigger="click"
+    onclick="if(event.target == this) {this.remove();}"
+>
+    <div class="container flex justify-center items-center my-16 mx-auto w-fit">
+        <div id="add-task-body" class="flex justify-center items-center">
+        <div class="bg-[#202020] h-[500px] p-10 rounded-xl text-[#B9B9B9] border-2 border-[#9a7f7f]">
+            <h1 class="text-2xl font-bold mb-5">Add a new task</h1>
+            <form
+                id="add-task-form" 
+                action="" method="post"
+                hx-post="{% url 'add_task' %}"
+            >
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="mb-3 flex flex-wrap justify-between">
+                        <label class="block font-bold mb-2" for="{{ field.id_for_label }}">
+                            {{ field.label }}{% if field.field.required %}<span class="asteriskField">*</span>{% endif %}
+                        </label>
+                        {{ field }}
+                    </div>
+                {% endfor %}
+                <div class="">
+                    <input
+                        type="submit"
+                        value="Submit"
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        title="Add a new task"
+                        hx-post="{% url 'add_task' %}"
+                        hx-target="#task-body"
+                        hx-swap="afterbegin"
+                        hx-on::after-request="document.getElementById('task-swap-div').remove();"
+                    />
+                </div>
+            </form>
+        </div>
+        </div>
+    </div>
+</div>

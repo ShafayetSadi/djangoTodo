@@ -1,0 +1,21 @@
+{% extends 'todo/base.html' %} 
+{% block content %} {% load crispy_forms_tags %}
+
+<div class="flex justify-center">
+  <div class="bg-[##202020] p-10 rounded-xl text-[#B9B9B9]">
+    <h1 class="text-2xl font-bold mb-5">Register</h1>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form | crispy }}
+        <div class="">
+            <input
+                type="submit"
+                name="login"
+                value="Register"
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            />
+        </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

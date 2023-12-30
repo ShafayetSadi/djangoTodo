@@ -4,12 +4,23 @@
 {% load partials %}
 {% load static %}
 
+<div class="w-16 h-16 sm:hidden fixed inset-0 z-10">
+    <button class="m-2 rounded-xl bg-zinc-800"
+        onclick="document.getElementById('navbar').classList.toggle('hidden');
+            document.getElementById('navbar').classList.toggle('absolute');
+        "
+    >
+        <svg class="w-12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="white" stroke="white" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="M80 160h352M80 256h352M80 352h352"/></svg>
+    </button>
+</div>
+
 <div
     class="box-border h-screen">
     <div
-        class="flex p-10 h-full gap-6 text-[#C8C8C8]">
+        class="flex p-10 h-full gap-6 text-[#c8c8c8]">
         <nav
-            class="bg-[#212121] rounded-xl border-2 border-[#333333] flex flex-col justify-between">
+            id="navbar"
+            class="hidden bg-[#212121] rounded-xl border-2 border-[#333333] sm:flex flex-col justify-between">
             <a href="{% url 'profile' %}">
             <div
                 class="bg-[#1F1F1F] m-2 p-2 w-52 flex justify-between hover:bg-black rounded-xl">
@@ -21,10 +32,10 @@
             </a>
             <div class="flex justify-center">
                 <ul>
-                    <li class="p-2">All Tasks</li>
-                    <li>Important</li>
-                    <li>Completed!</li>
-                    <li>Do It Now</li>
+                    <li class="p-2 hover:bg-black">All Tasks</li>
+                    <li class="p-2">Important</li>
+                    <li class="p-2">Completed!</li>
+                    <li class="p-2">Do It Now</li>
                 </ul>
             </div>
             <form method="post" action="{% url 'logout' %}">
@@ -39,6 +50,7 @@
             </form>
         </nav>
         <div
+            id="main-body"
             class="bg-[#212121] rounded-xl border-2 border-[#333333] scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar scrollbar-thumb-[#3D3B40] scrollbar-track-none overflow-y-scroll">
             <div class="flex justify-between px-4 py-2">
                 <h1 class="text-2xl font-bold">All Task</h1>

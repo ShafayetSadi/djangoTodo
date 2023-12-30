@@ -1,16 +1,21 @@
 {% extends 'todo/base.html' %} {% block content %} {% load crispy_forms_tags %}
 
 <div class="flex justify-center">
-  <div class="bg-[##202020] p-10 rounded-xl text-[#B9B9B9]">
-    <h1 class="text-2xl font-bold mb-5">Login</h1>
+  <div class="bg-[##202020] p-10 rounded-xl text-[#B9B9B9] w-[500px]">
+    <h1 class="text-2xl font-bold mb-5">Login in to View your Tasks</h1>
     <form action="" method="post">
         {% csrf_token %}
+        {% if form.non_field_errors %}
+            <div class="border-2 border-red-900 rounded-xl m-2 text-center">
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
         {% for field in form %}
             <div class="mb-3">
                 <label class="block font-bold mb-2" for="{{ field.id_for_label }}">
                     {{ field.label }}{% if field.field.required %}<span class="asteriskField">*</span>{% endif %}
                 </label>
-                    {{ field }}                
+                    {{ field }}
             </div>
         {% endfor %}
         <div class="">
@@ -22,6 +27,11 @@
             />
         </div>
     </form>
+    <div class="text-xl font-bold my-4">
+        Need an account? <span class="text-orange-900 underline">
+            <a href="{% url 'register' %}">Sign Up</a>
+        </span>
+    </div>
   </div>
 </div>
 {% endblock %}

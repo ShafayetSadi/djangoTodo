@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 # Create your models here.
 class Task(models.Model):
@@ -8,7 +9,7 @@ class Task(models.Model):
     description = models.TextField(null=True, blank=True)
     is_completed = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
-    due_date = models.DateTimeField(null=True, blank=True)
+    due_date = models.DateTimeField(default=timezone.now)
     is_important = models.BooleanField(default=False)
 
     def __str__(self):

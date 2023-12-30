@@ -2,11 +2,12 @@
 {% block content %}
 
 {% load partials %}
+{% load static %}
 
 <div
     class="box-border h-screen">
     <div
-        class="flex p-10 h-full gap-10 text-[#C8C8C8]">
+        class="flex p-10 h-full gap-6 text-[#C8C8C8]">
         <nav
             class="bg-[#212121] rounded-xl border-2 border-[#333333] flex flex-col justify-between">
             <a href="{% url 'profile' %}">
@@ -38,7 +39,7 @@
             </form>
         </nav>
         <div
-            class="bg-[#212121] rounded-xl border-2 border-[#333333] overflow-scroll">
+            class="bg-[#212121] rounded-xl border-2 border-[#333333] scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar scrollbar-thumb-[#3D3B40] scrollbar-track-none overflow-y-scroll">
             <div class="flex justify-between px-4 py-2">
                 <h1 class="text-2xl font-bold">All Task</h1>
                 <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
@@ -52,45 +53,53 @@
             </div>
             <main
                 class="">
-                <div id="task-body" class="m-4 flex flex-wrap gap-6 justify-center">
+                <div id="task-body" class="m-4 flex flex-wrap gap-4 justify-center">
                 
                 {% for task in tasks %}
                     {% partialdef task-partial inline=True %}
                     
                         <div
-                            class="bg-[#313131] h-56 w-full max-w-[270px] rounded-xl border-[#9a7f7f]">
+                            class="bg-[#272727] h-56 w-full max-w-[270px] rounded-xl border-[#9a7f7f]">
                             <div
-                                class="p-2 flex flex-col">
+                                class="flex flex-col px-2">
                                 <div
-                                    class="text-xl text-blue-700 font-semibold">
+                                    class="text-xl text-[#00ADB5] font-bold py-1 px-2">
                                     {{ task.title }}
-                                </div>
+                                </div> 
                                 <div
-                                    class="p-1 w-full h-[100px] overflow-scroll text-base">
-                                    {{ task.description }}
+                                    class="py-1 px-2 w-full bg-[#212121] rounded-xl h-[112px] text-base scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar scrollbar-thumb-[#3D3B40] scrollbar-track-none overflow-y-scroll">
+                                    <div>
+                                        {{ task.description }}
+                                    </div>
+
                                 </div>
                                 {% if task.due_date %}
-                                    <div class="px-1 py-1 font-semibold text-emerald-500">{{ task.due_date }}</div>
+                                    <div class="px-1 py-1 font-semibold text-[#5C8374]">{{ task.due_date|date:'F j, Y' }}</div>
                                 {% else %}
-                                <div class="px-1 py-1 font-semibold text-emerald-500">{{ task.created_at|date:'F j, Y' }}</div>
+                                <div class="px-1 py-1 font-semibold text-[#5C8374]">{{ task.created_at|date:'F j, Y' }}</div>
                                 {% endif %}
                                 <div
-                                    class="flex gap-2 my-2">
-                                    {% if task.important %}
+                                    class="flex justify-between gap-2 items-center">
+                                    {% if task.is_important %}
                                     <button
-                                        class="bg-blue-600 rounded-2xl text-sm font-bold h-8 px-2">Important</button>
+                                        class="bg-blue-600 rounded-2xl text-sm font-bold h-8 px-2">Imp.</button>
                                     {% endif %}
-                                    {% if task.completed %}
+                                    {% if task.is_completed %}
                                     <button
-                                        class="bg-green-600 rounded-2xl text-sm font-bold h-8 px-2">Completed</button>
+                                        class="bg-green-600 text-[#EEEEEE] rounded-2xl text-sm font-bold h-8 px-2">Completed</button>
                                     {% else %}
-                                    <button
-                                        class="bg-red-600 rounded-2xl text-sm font-bold h-8 px-2">Incomplete</button>
+                                    <button class="bg-red-600 rounded-2xl text-sm font-bold h-8 px-2">
+                                        <a href="{% url 'complete_task' task.id %}">Mark Comp.</a>
+                                    </button>
                                     {% endif %}
-                                    <button
-                                        class="bg-pink-600 rounded-2xl text-sm font-bold h-8 px-2">Edit</button>
-                                    <button
-                                        class="bg-red-900 rounded-2xl text-sm font-bold h-8 px-2">Delete</button>
+                                    <div class="flex gap-3">
+                                        <div>
+                                            <a href="{% url 'edit_task' task.id %}"><svg class="w-8" fill="none" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 12V5.749a.6.6 0 0 0-.176-.425l-3.148-3.148A.6.6 0 0 0 16.252 2H4.6a.6.6 0 0 0-.6.6v18.8a.6.6 0 0 0 .6.6H11M8 10h8M8 6h4m-4 8h3" stroke="#b3bac9" stroke-linecap="round" stroke-linejoin="round" class="stroke-000000"></path><path d="M16 5.4V2.354a.354.354 0 0 1 .604-.25l3.292 3.292a.353.353 0 0 1-.25.604H16.6a.6.6 0 0 1-.6-.6Z" fill="#b3bac9" stroke="#b3bac9" stroke-linecap="round" stroke-linejoin="round" class="fill-000000 stroke-000000"></path><path d="m17.954 16.94 1-1a1.121 1.121 0 0 1 1.586 0v0a1.121 1.121 0 0 1 0 1.585l-1 1m-1.586-1.586-2.991 2.991a1 1 0 0 0-.28.553l-.244 1.557 1.557-.243a1 1 0 0 0 .553-.28l2.99-2.992m-1.585-1.586 1.586 1.586" stroke="#b3bac9" stroke-linecap="round" stroke-linejoin="round" class="stroke-000000"></path></svg></a>
+                                        </div>
+                                        <div>
+                                            <a href="{% url 'delete_task' task.id %}"><svg class="w-8" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="M12 38c0 2.21 1.79 4 4 4h16c2.21 0 4-1.79 4-4V14H12v24zM38 8h-7l-2-2H19l-2 2h-7v4h28V8z" fill="#b6b9c7" class="fill-000000"></path><path d="M0 0h48v48H0z" fill="none"></path></svg></a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

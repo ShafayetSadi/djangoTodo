@@ -6,7 +6,6 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def anonymous_required(view_func):
-    @login_required
     def _wrapped_view(request, *args, **kwargs):
         if request.user.is_authenticated:
             return redirect('index')
@@ -23,21 +22,6 @@ def index(request):
     return render(request, 'todo/index.html', context)
 
 def add_task(request):
-    # if request.method == 'POST':
-    #     form = TaskForm(request.POST)
-    #     if form.is_valid():
-    #         # Save the task to the database
-    #         task = form.save(commit=False)
-    #         task.user = request.user
-    #         task.save()
-    #         print("Task created successfully.")
-    #         return redirect('index')
-    # else:
-    #     context = {
-    #         'form': TaskForm(),
-    #     }
-    # return render(request, 'todo/add_task.html', context)
-
     # handle this with htmx
     form = TaskForm(request.POST)
     if form.is_valid():
@@ -57,13 +41,28 @@ def add(request):
     
 
 def edit_task(request, task_id):
-    return render(request, 'todo/edit_task.html')
+    form = TaskForm(request.POST)
+    if form.is_valid():
+        # edit the task given by task_id in the database
+        task = Task.objects.get(id=task_id)
+        task.title = form.cleaned_data['title']
+        task.description = form.cleaned_data['description']
+        task.due_date = form.cleaned_data['due_date']
+        task.is_important = form.cleaned_data['is_important']
+        task.save()
+        context = { 'task': task }
+    return redirect('index')
 
 def delete_task(request, task_id):
-    return render(request, 'todo/delete_task.html')
+    task = Task.objects.get(id=task_id)
+    task.delete()
+    return redirect('index')
 
 def complete_task(request, task_id):
-    return render(request, 'todo/complete_task.html')
+    task = Task.objects.get(id=task_id)
+    task.is_completed = True
+    task.save()
+    return redirect('index')
 
 def profile(request):
     return render(request, 'todo/profile.html')

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Task
 from .forms import TaskForm, UserForm, ProfileForm
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -72,15 +73,16 @@ def register(request):
     if request.method == 'POST':
         user_form = UserForm(request.POST)
         if user_form.is_valid():
-            user = user_form.save()
-            # Hash the password
-            user.set_password(user.password)
+            user = User(
+                username=user_form.cleaned_data['username'],
+                email=user_form.cleaned_data['email'],
+            )
+            user.set_password(user_form.cleaned_data['password'])
             user.save()
             print("User created successfully.")
             return redirect('login')
-    else:
-        user_form = UserForm()
-        context = {
-            'form': user_form,
-        }
+    user_form = UserForm()
+    context = {
+        'form': user_form,
+    }
     return render(request, 'todo/register.html', context)

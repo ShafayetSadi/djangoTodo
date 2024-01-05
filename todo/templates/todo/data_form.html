@@ -1,0 +1,30 @@
+<form method="post">
+    {% csrf_token %}
+    {% if form.non_field_errors %}
+        <div class="border-2 border-red-900 rounded-xl m-2 text-center">
+            {{ form.non_field_errors }}
+        </div>
+    {% endif %}
+    {% for field in  form %}
+    <div class="mb-3">
+        <label class="block font-bold mb-2" for="{{ field.id_for_label }}">
+            {{ field.label }}{% if field.field.required %}<span class="asteriskField">*</span>{% endif %}
+        </label>
+        {{ field }}
+            {% if field.errors %}
+                <div class="p-2 border-2 border-red-900 rounded-xl m-2 text-center">
+                    {{ field.errors }}
+                </div>
+            {% endif %}
+            
+            
+    </div>
+    {% endfor %}
+    <div class="">
+        <input
+            type="submit"
+            value="{{ submit|default:'Submit' }}"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        />
+    </div>
+</form>

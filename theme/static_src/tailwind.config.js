@@ -53,6 +53,18 @@ module.exports = {
         require('@tailwindcss/forms'),
         require('@tailwindcss/typography'),
         require('@tailwindcss/aspect-ratio'),
-        require('tailwind-scrollbar')
+        require('tailwind-scrollbar'),
+        require('daisyui'),
     ],
+    
+    daisyui: {
+        themes: false,
+        darkTheme: 'dark',
+        base: true,
+        styled: true,
+        utils: true,
+        prefix: '',
+        logs: true,
+        themeRoot: ':root',
+    }
 }

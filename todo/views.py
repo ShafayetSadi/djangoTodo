@@ -81,7 +81,8 @@ def register(request):
             user.save()
             print("User created successfully.")
             return redirect('login')
-    user_form = UserForm()
+    else:
+        user_form = UserForm()
     context = {
         'form': user_form,
     }

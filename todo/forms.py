@@ -32,7 +32,7 @@ class TaskForm(forms.ModelForm):
         widgets = {
             'title': TextInput(attrs={
                 'placeholder': "Add new task...",
-                'class': 'textinput block w-full bg-[#121212] rounded-lg px-4 py-2 border-transparent focus:border-transparent focus:ring-0',
+                'class': "input input-bordered w-full max-w-xs"
             }),
             'description': TextInput(attrs={
                 'placeholder': "Add description...",
@@ -44,7 +44,8 @@ class TaskForm(forms.ModelForm):
             }),
             'is_important': forms.CheckboxInput(
                 attrs={
-                    'class': "form-checkbox m-2 h-5 w-5 text-gray-600 border-transparent focus:border-transparent focus:ring-0"
+                    'type': 'checkbox',
+                    'class': "checkbox checkbox-accent"
                 }
             )
         }

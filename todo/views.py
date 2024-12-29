@@ -22,8 +22,6 @@ def index(request):
     context = {
         "tasks": Task.objects.filter(user=request.user),
     }
-    # for task in context['tasks']:
-    #     print(task.title)
     return render(request, "todo/index.html", context)
 
 

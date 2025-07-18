@@ -1,2 +1,9 @@
 .idea
+.venv
+
+*.log
+*.pot
+*.pyc
+/media
+
 *.sqlite3

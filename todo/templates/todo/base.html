@@ -1,4 +1,3 @@
-{% load static tailwind_tags %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -7,18 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Todo - {{ user.username }}</title>
     <!-- <script src="{% static 'campus/js/htmx.min.js' %}" defer></script> -->
-    <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
+    <script
+      src="https://unpkg.com/htmx.org@1.9.10"
+      integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC"
+      crossorigin="anonymous"
+    ></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    {% tailwind_css %}
   </head>
-  <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' class="box-border h-screen bg-[#181818]">
+  <body
+    hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+    class="box-border h-screen bg-[#181818]"
+  >
     <div class="w-96 mx-auto text-center rounded-md bg-green-400 m-2">
-        {% if messages %}
-        {% for message in messages %}
-        {{ message }}
-        {% endfor %}
-        {% endif %}
+      {% if messages %} {% for message in messages %} {{ message }} {% endfor %}
+      {% endif %}
     </div>
-    {% block content %}{% endblock %}    
+    {% block content %}{% endblock %}
   </body>
 </html>

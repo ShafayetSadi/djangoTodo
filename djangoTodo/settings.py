@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-7esu_pe*nc@fazb&u&ktj^4^2c6)od7%nuij6*7by*71s&wr=q"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["127.0.0.1", "todoshafayet.pythonanywhere.com"]
 
@@ -37,8 +37,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "todo",
-    "tailwind",
-    "theme",
     "django_browser_reload",
     "whitenoise.runserver_nostatic",
     "crispy_forms",

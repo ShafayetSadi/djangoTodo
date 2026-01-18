@@ -6,4 +6,4 @@ class TodoConfig(AppConfig):
     name = "todo"
 
     def ready(self):
-        import todo.signals
+        import todo.signals  # noqa: F401

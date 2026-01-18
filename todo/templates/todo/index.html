@@ -1,7 +1,6 @@
 {% extends 'todo/base.html' %}
 {% block content %}
 
-{% load partials %}
 {% load static %}
 
 <div class="w-16 h-16 sm:hidden fixed inset-0 z-10">
@@ -30,9 +29,9 @@
                     </div>
                 </div>
                 <div class="p-2">{{ user.username }}</div>
-                
+
             </div>
-            
+
             </a>
             <div class="menu bg-base-200 w-56 rounded-box">
                 <ul>
@@ -70,10 +69,10 @@
             <main
                 class="">
                 <div id="task-body" class="m-4 flex flex-wrap gap-4 justify-center">
-                
+
                 {% for task in tasks %}
                     {% partialdef task-partial inline=True %}
-                    
+
                         <div
                             class="bg-[#272727] h-56 w-full max-w-[270px] rounded-xl border-[#9a7f7f]">
                             <div
@@ -81,7 +80,7 @@
                                 <div
                                     class="text-xl text-[#00ADB5] font-bold py-1 px-2">
                                     {{ task.title }}
-                                </div> 
+                                </div>
                                 <div
                                     class="py-1 px-2 w-full bg-[#212121] rounded-xl h-[112px] text-base scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar scrollbar-thumb-[#3D3B40] scrollbar-track-none overflow-y-scroll">
                                     <div>
@@ -120,7 +119,7 @@
                         </div>
                     {% endpartialdef %}
                 {% endfor %}
-                
+
 
                 <div
                     class="h-56 w-full max-w-[270px] rounded-xl border-4 border-dashed border-[#313131] flex justify-center items-center

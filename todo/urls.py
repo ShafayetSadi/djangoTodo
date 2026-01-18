@@ -26,15 +26,3 @@ urlpatterns = [
         name="logout",
     ),
 ]
-"""
-from django.contrib.auth.views import LoginView
-from django.shortcuts import redirect
-
-class CustomLoginView(LoginView):
-    def dispatch(self, request, *args, **kwargs):
-        if request.user.is_authenticated:
-            return redirect('index')
-        return super().dispatch(request, *args, **kwargs)
-
-path('login/', views.CustomLoginView.as_view(template_name='todo/login.html', authentication_form=MyAuthForm), name='login'),
-"""
